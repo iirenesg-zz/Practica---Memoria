@@ -1,0 +1,33 @@
+.card {
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 65px;
+	height: 65px;
+	display: inline-block;
+	margin: 5px;
+	cursor: pointer;
+
+	@media screen and (min-width: 400px) {
+		width: 85px;
+		height: 85px;
+	}
+
+	@media screen and (min-width: 500px) {
+		width: 100px;
+		height: 100px;
+		margin: 10px;
+	}
+
+	@media screen and (min-width: 600px) {
+		width: 150px;
+		height: 150px;
+	}
+}
+
+.front {
+	background-image: url("../img/cardsheet.png");
+}
+
+.back {
+	background-image: url("../img/back.png");
+}

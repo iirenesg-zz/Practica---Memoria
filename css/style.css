@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font: 21px "Quicksand", sans-serif; }
+
+.hidden {
+  visibility: hidden !important; }
+
+.card {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 65px;
+  height: 65px;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer; }
+  @media screen and (min-width: 400px) {
+    .card {
+      width: 85px;
+      height: 85px; } }
+  @media screen and (min-width: 500px) {
+    .card {
+      width: 100px;
+      height: 100px;
+      margin: 10px; } }
+  @media screen and (min-width: 600px) {
+    .card {
+      width: 150px;
+      height: 150px; } }
+
+.front {
+  background-image: url("../img/cardsheet.png"); }
+
+.back {
+  background-image: url("../img/back.png"); }
+
+header {
+  position: fixed;
+  top: 0;
+  background-color: #009DDC;
+  width: 100vw;
+  height: 100px; }
+
+.game-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  transform: translateY(-50%);
+  position: relative;
+  top: 50%; }
+
+.game-wrapper {
+  margin: 115px auto 0;
+  max-width: 1200px;
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+  @media screen and (min-width: 1200px) {
+    .game-wrapper {
+      margin: 150px auto 0;
+      width: 80%; } }
+
+/*# sourceMappingURL=style.css.map */
