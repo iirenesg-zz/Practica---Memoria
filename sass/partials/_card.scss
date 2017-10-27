@@ -15,8 +15,6 @@
 		width: 153px;
 		height: 153px;
 	}
-
-
 }
 
 .hidden {
@@ -32,10 +30,6 @@
 
 	@media screen and (min-width: 600px) {
 		background-image: url("../img/cards-150w.png");
-	}
-
-	@media screen and (min-width: 1180px) {
-		background-image: url("../img/cards-200w.png");
 	}
 }
 
@@ -54,10 +48,6 @@
 	@media screen and (min-width: 600px) {
 		background-position: -20px -15px;
 	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -28px -22px;
-	}
 }
 
 .card1 {
@@ -69,10 +59,6 @@
 
 	@media screen and (min-width: 600px) {
 		background-position: -186px -15px;
-	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -249px -22px;
 	}
 }
 
@@ -86,10 +72,6 @@
 	@media screen and (min-width: 600px) {
 		background-position: -353px -15px;
 	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -471px -22px;
-	}
 }
 
 .card3 {
@@ -101,10 +83,6 @@
 
 	@media screen and (min-width: 600px) {
 		background-position: -520px -15px;
-	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -693px -22px;
 	}
 }
 
@@ -118,10 +96,6 @@
 	@media screen and (min-width: 600px) {
 		background-position: -687px -15px;
 	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -915px -22px;
-	}
 }
 
 .card5 {
@@ -133,10 +107,6 @@
 
 	@media screen and (min-width: 600px) {
 		background-position: -20px -181px;
-	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -28px -242px;
 	}
 }
 
@@ -150,10 +120,6 @@
 	@media screen and (min-width: 600px) {
 		background-position: -186px -181px;
 	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -249px -242px;
-	}
 }
 
 .card7 {
@@ -165,10 +131,6 @@
 
 	@media screen and (min-width: 600px) {
 		background-position: -353px -181px;
-	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -471px -242px;
 	}
 }
 
@@ -182,10 +144,6 @@
 	@media screen and (min-width: 600px) {
 		background-position: -520px -181px;
 	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -693px -242px;
-	}
 }
 
 .card9 {
@@ -197,9 +155,5 @@
 
 	@media screen and (min-width: 600px) {
 		background-position: -687px -181px;
-	}
-
-	@media screen and (min-width: 1180px) {
-		background-position: -915px -242px;
 	}
 }

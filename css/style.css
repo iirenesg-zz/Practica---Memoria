@@ -102,9 +102,6 @@ header {
   @media screen and (min-width: 600px) {
     .front {
       background-image: url("../img/cards-150w.png"); } }
-  @media screen and (min-width: 1180px) {
-    .front {
-      background-image: url("../img/cards-200w.png"); } }
 
 .back {
   background-image: url("../img/back.png");
@@ -118,9 +115,6 @@ header {
   @media screen and (min-width: 600px) {
     .card0 {
       background-position: -20px -15px; } }
-  @media screen and (min-width: 1180px) {
-    .card0 {
-      background-position: -28px -22px; } }
 
 .card1 {
   background-position: -81px -5px; }
@@ -130,9 +124,6 @@ header {
   @media screen and (min-width: 600px) {
     .card1 {
       background-position: -186px -15px; } }
-  @media screen and (min-width: 1180px) {
-    .card1 {
-      background-position: -249px -22px; } }
 
 .card2 {
   background-position: -155px -5px; }
@@ -142,9 +133,6 @@ header {
   @media screen and (min-width: 600px) {
     .card2 {
       background-position: -353px -15px; } }
-  @media screen and (min-width: 1180px) {
-    .card2 {
-      background-position: -471px -22px; } }
 
 .card3 {
   background-position: -228px -5px; }
@@ -154,9 +142,6 @@ header {
   @media screen and (min-width: 600px) {
     .card3 {
       background-position: -520px -15px; } }
-  @media screen and (min-width: 1180px) {
-    .card3 {
-      background-position: -693px -22px; } }
 
 .card4 {
   background-position: -301px -5px; }
@@ -166,9 +151,6 @@ header {
   @media screen and (min-width: 600px) {
     .card4 {
       background-position: -687px -15px; } }
-  @media screen and (min-width: 1180px) {
-    .card4 {
-      background-position: -915px -22px; } }
 
 .card5 {
   background-position: -8px -79px; }
@@ -178,9 +160,6 @@ header {
   @media screen and (min-width: 600px) {
     .card5 {
       background-position: -20px -181px; } }
-  @media screen and (min-width: 1180px) {
-    .card5 {
-      background-position: -28px -242px; } }
 
 .card6 {
   background-position: -82px -79px; }
@@ -190,9 +169,6 @@ header {
   @media screen and (min-width: 600px) {
     .card6 {
       background-position: -186px -181px; } }
-  @media screen and (min-width: 1180px) {
-    .card6 {
-      background-position: -249px -242px; } }
 
 .card7 {
   background-position: -155px -79px; }
@@ -202,9 +178,6 @@ header {
   @media screen and (min-width: 600px) {
     .card7 {
       background-position: -353px -181px; } }
-  @media screen and (min-width: 1180px) {
-    .card7 {
-      background-position: -471px -242px; } }
 
 .card8 {
   background-position: -228px -79px; }
@@ -214,9 +187,6 @@ header {
   @media screen and (min-width: 600px) {
     .card8 {
       background-position: -520px -181px; } }
-  @media screen and (min-width: 1180px) {
-    .card8 {
-      background-position: -693px -242px; } }
 
 .card9 {
   background-position: -301px -79px; }
@@ -226,9 +196,6 @@ header {
   @media screen and (min-width: 600px) {
     .card9 {
       background-position: -687px -181px; } }
-  @media screen and (min-width: 1180px) {
-    .card9 {
-      background-position: -915px -242px; } }
 
 .game-bar {
   color: #fff;
