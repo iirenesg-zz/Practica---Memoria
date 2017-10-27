@@ -6,15 +6,31 @@ header {
 	height: 75px;
 	border-bottom: 5px solid $main-color;
 
+	div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	button {
+		@media screen and (min-width: 700px) {
+			top: -20px;
+		}
+
+		@media screen and (min-width: 1200px) {
+			top: -70px;
+		}
+	}
+
 	@media screen and (min-width: 420px) {
-		height: 100px;
+		height: 75px;
 	}
 }
 
 .logo {
 	display: inline-block;
 	background-color: $main-color;	
-	position: absolute;
+	position: relative;
 	left: 10px;
 	top: 10px;
 	width: 100px;
@@ -26,6 +42,17 @@ header {
 		position: relative;
 		top: 40%;
 		left: 25%;
+
+		@media screen and (min-width: 1200px) {
+			top: 55%;
+			left: 40%;
+		}
+	}
+
+	@media screen and (min-width: 700px) {
+		width: 150px;
+		height: 150px;
+		top: -35px;
 	}
 
 	@media screen and (min-width: 1200px) {

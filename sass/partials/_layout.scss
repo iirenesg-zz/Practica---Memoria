@@ -22,22 +22,22 @@
 	width: 80%;
 	margin: 0 auto;
 	max-width: 1200px;
+	position: relative;
 }
 
 .game-wrapper {
 	margin: 115px auto 0;
-	max-width: 1200px;
 	width: 95%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 
 	@media screen and (min-width: 375px) {
-		margin: 150px auto 0;
+		margin: 130px auto 0;
 	}
 
 	@media screen and (min-width: 1200px) {
-		margin: 150px auto 0;
-		width: 80%;
+		margin: 180px auto 0;
+		max-width: 1200px;
 	}
 }
