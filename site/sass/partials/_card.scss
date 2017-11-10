@@ -1,0 +1,184 @@
+.card-wrapper {
+	position: relative;
+	perspective: 800px;
+	width: 65px;
+	height: 65px;
+	margin: 5px;
+	cursor: pointer;
+	display: inline-block;
+
+	@media screen and (min-width: 400px) {
+		width: 87px;
+		height: 87px;
+	}
+
+	@media screen and (min-width: 600px) {
+		width: 153px;
+		height: 153px;
+	}
+}
+
+.card-3D {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	transform-style: preserve-3d;
+	transition: transform .5s;
+
+	&.flipped {
+		transform: rotateY(180deg);
+	}
+}
+
+
+.card {
+	background-repeat: no-repeat;
+	margin: 0;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+}
+
+.hidden {
+	visibility: hidden !important;
+}
+
+.front {
+	background-image: url("../img/cards-65w.png");
+	transform: rotateY(180deg);
+
+	@media screen and (min-width: 400px) {
+		background-image: url("../img/cards-85w.png");
+	}
+
+	@media screen and (min-width: 600px) {
+		background-image: url("../img/cards-150w.png");
+	}
+}
+
+.back {
+	background-image: url("../img/back.png");
+	background-size: contain;
+}
+
+.card0 {
+	background-position: -8px -5px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -11px -7px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -20px -15px;
+	}
+}
+
+.card1 {
+	background-position: -81px -5px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -105px -7px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -186px -15px;
+	}
+}
+
+.card2 {
+	background-position: -155px -5px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -200px -7px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -353px -15px;
+	}
+}
+
+.card3 {
+	background-position: -228px -5px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -294px -7px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -520px -15px;
+	}
+}
+
+.card4 {
+	background-position: -301px -5px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -389px -7px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -687px -15px;
+	}
+}
+
+.card5 {
+	background-position: -8px -79px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -11px -102px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -20px -181px;
+	}
+}
+
+.card6 {
+	background-position: -82px -79px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -105px -102px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -186px -181px;
+	}
+}
+
+.card7 {
+	background-position: -155px -79px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -200px -102px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -353px -181px;
+	}
+}
+
+.card8 {
+	background-position: -228px -79px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -294px -102px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -520px -181px;
+	}
+}
+
+.card9 {
+	background-position: -301px -79px;
+
+	@media screen and (min-width: 400px) {
+		background-position: -389px -102px;
+	}
+
+	@media screen and (min-width: 600px) {
+		background-position: -687px -181px;
+	}
+}
