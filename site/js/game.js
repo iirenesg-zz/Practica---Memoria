@@ -15,7 +15,7 @@ function Game(_container) {
         for (var i=0; i < pairs*2; i++) {
             var card;
             i < 10 ? card = new Card(i, i) : card = new Card(i-10, i);
-            card.addEventListener('click', function(){});
+            card.element.addEventListener('click', function(){updateGame(this)});
             tcards.push(card);
         };
          
@@ -33,12 +33,11 @@ function Game(_container) {
         return Math.floor(Math.random() * (max - min)) + min; 
     }
 
-    function updateGame(i) {
-        console.log(i);
+    function updateGame(el) {
         if(stats.flippedCards.length < 2) {
-            stats.flippedCards.push(cards[i]);
-            console.log(cards);
-            cards[i].toggleCard();
+            card = cards.filter(function(c){return Number(c.id) == Number(el.id)})[0];
+            stats.flippedCards.push(card);
+            card.toggleCard();
 
             if(stats.flippedCards.length == 2) {
                 setTimeout(checkPair, 1000);
@@ -54,8 +53,8 @@ function Game(_container) {
             card1.hideCard();
             card2.hideCard();
         } else {
-            card.toggleCard1();
-            card.toggleCard2();
+            card1.toggleCard();
+            card2.toggleCard();
         }
         flippedCards = [];
     }
@@ -69,14 +68,17 @@ function Game(_container) {
 function Card(v, id) {
  
     var self = this;
+    self.value = v;
+    self.id = id;
  
     self.compose = function() {
         var el = document.createElement('div');
         el.classList.add('card-wrapper');
+        el.setAttribute('id', self.id);
         var card = document.createElement('div');
         card.classList.add('card-3D');
         var front = document.createElement('span');
-        front.setAttribute('class', 'card front card' + v);
+        front.setAttribute('class', 'card front card' + self.value);
         var back = document.createElement('span');
         back.setAttribute('class', 'card back');
 
@@ -96,8 +98,6 @@ function Card(v, id) {
         self.element.classList.add('hidden');
     }
  
-    self.value = v;
-    self.id = id;
     self.element = self.compose();
     self.up = false;
     self.matched = false;
