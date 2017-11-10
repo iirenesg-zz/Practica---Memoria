@@ -1,8 +1,9 @@
-function Game(_container) {
+function Game(_container, _scoreDisplay) {
  
     var pairs = 10;
     var cards = [];
     var container = _container;
+    var scoreDisplay = _scoreDisplay;
     var stats = {
         score: 0,
         initTime: new Date(),
@@ -45,18 +46,23 @@ function Game(_container) {
         }
     }
 
+    function updateScore() {
+        scoreDisplay.innerText = stats.score;
+    }
+
     function checkPair() {
         var card1 = stats.flippedCards[0];
         var card2 = stats.flippedCards[1];
         if(card1.value == card2.value) {
-            stats.score++;
+            (!card1.seen && !card2.seen) ? stats.score += 100 : stats.score += 50;
             card1.hideCard();
             card2.hideCard();
+            updateScore();
         } else {
             card1.toggleCard();
             card2.toggleCard();
         }
-        flippedCards = [];
+        stats.flippedCards = [];
     }
  
     return {
@@ -89,9 +95,9 @@ function Card(v, id) {
     };
 
     self.toggleCard = function() {
-        console.log(self);
         var el = self.element.getElementsByClassName('card-3D')[0];
         el.classList.toggle('flipped');
+        self.seen = true;
     }
 
     self.hideCard = function() {
@@ -99,6 +105,5 @@ function Card(v, id) {
     }
  
     self.element = self.compose();
-    self.up = false;
-    self.matched = false;
+    self.seen = false;
 }
