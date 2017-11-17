@@ -1,16 +1,37 @@
-function Game(_container, _scoreDisplay) {
+function Game(config) {
  
     var pairs = 10;
+    var matches = 0;
     var cards = [];
-    var container = _container;
-    var scoreDisplay = _scoreDisplay;
+    var container = config.container;
+    var scoreDisplay = config.scoreDisplay;
+    var minuteDisplay = config.minuteDisplay;
+    var secondDisplay = config.secondDisplay;
+    var messageBox = config.messageBox;
+    var messageDisplay = config.messageDisplay;
+    var messageBtn = config.messageBtn;
     var stats = {
         score: 0,
-        initTime: new Date(),
+        initTime: new Date().getTime(),
         flippedCards: []
+    };
+
+    function updateTime() {
+        setInterval(function(){
+            var time = new Date().getTime();
+            var amt = (time - stats.initTime) / 1000;
+            var minutes = (amt / 60).toFixed(0);
+            console.log((amt / 60));
+            var seconds = (amt - (minutes * 60)).toFixed(0);
+
+            seconds < 10 ? secondDisplay.innerText = '0' + seconds : secondDisplay.innerText = seconds;
+            minutes < 10 ? minuteDisplay.innerText = '0' + minutes : minuteDisplay.innerText = minutes;
+
+        }, 1000);
     };
  
     function init() {
+        messageBox.classList.add('hidden');
         var tcards = [];
          
         for (var i=0; i < pairs*2; i++) {
@@ -26,6 +47,8 @@ function Game(_container, _scoreDisplay) {
             container.appendChild(tcards[n].element);
             tcards.splice(n, 1);
         }
+
+        updateTime();
     }
  
     function getRandomInt(min, max) {
@@ -54,15 +77,27 @@ function Game(_container, _scoreDisplay) {
         var card1 = stats.flippedCards[0];
         var card2 = stats.flippedCards[1];
         if(card1.value == card2.value) {
-            (!card1.seen && !card2.seen) ? stats.score += 100 : stats.score += 50;
+            matches++;
+            (card1.seen && card2.seen) ? stats.score += 50 : stats.score += 100;
             card1.hideCard();
             card2.hideCard();
             updateScore();
+            checkGame();
         } else {
+            card1.seen = true;
             card1.toggleCard();
+            card2.seen = true;
             card2.toggleCard();
         }
         stats.flippedCards = [];
+    }
+
+    function checkGame() {
+        if(matches == pairs) {
+            messageDisplay.innerText = 'You won!';
+            messageBtn.innerText = 'Play again';
+            messageBox.classList.remove('hidden');
+        }
     }
  
     return {
@@ -97,7 +132,6 @@ function Card(v, id) {
     self.toggleCard = function() {
         var el = self.element.getElementsByClassName('card-3D')[0];
         el.classList.toggle('flipped');
-        self.seen = true;
     }
 
     self.hideCard = function() {
