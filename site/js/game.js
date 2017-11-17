@@ -20,9 +20,8 @@ function Game(config) {
         setInterval(function(){
             var time = new Date().getTime();
             var amt = (time - stats.initTime) / 1000;
-            var minutes = (amt / 60).toFixed(0);
-            console.log((amt / 60));
-            var seconds = (amt - (minutes * 60)).toFixed(0);
+            var minutes = Math.floor(amt / 60);
+            var seconds = Math.floor(amt - (minutes * 60));
 
             seconds < 10 ? secondDisplay.innerText = '0' + seconds : secondDisplay.innerText = seconds;
             minutes < 10 ? minuteDisplay.innerText = '0' + minutes : minuteDisplay.innerText = minutes;
