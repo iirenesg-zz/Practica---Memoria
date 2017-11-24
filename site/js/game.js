@@ -10,6 +10,7 @@ function Game(config) {
     var messageBox = config.messageBox;
     var messageDisplay = config.messageDisplay;
     var messageBtn = config.messageBtn;
+    var timeInterval;
     var stats = {
         score: 0,
         initTime: new Date().getTime(),
@@ -17,7 +18,7 @@ function Game(config) {
     };
 
     function updateTime() {
-        setInterval(function(){
+        timeInterval = window.setInterval(function(){
             var time = new Date().getTime();
             var amt = (time - stats.initTime) / 1000;
             var minutes = Math.floor(amt / 60);
@@ -77,12 +78,16 @@ function Game(config) {
         var card2 = stats.flippedCards[1];
         if(card1.value == card2.value) {
             matches++;
-            (card1.seen && card2.seen) ? stats.score += 50 : stats.score += 100;
+            stats.score += 100;
             card1.hideCard();
             card2.hideCard();
             updateScore();
             checkGame();
         } else {
+            if(card1.seen || card2.seen) {
+                stats.score -= 50;
+                updateScore();
+            }
             card1.seen = true;
             card1.toggleCard();
             card2.seen = true;
@@ -93,6 +98,7 @@ function Game(config) {
 
     function checkGame() {
         if(matches == pairs) {
+            window.clearInterval(timeInterval);
             messageDisplay.innerText = 'You won!';
             messageBtn.innerText = 'Play again';
             messageBox.classList.remove('hidden');
