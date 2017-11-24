@@ -1,101 +1,184 @@
-var gulp = require('gulp');
+/**
+ * Basic gulp file for static site development.
+ * 
+ */
+/* eslint-env node */
 
-/*---------  Sass ---------*/
+'use strict'
 
-var sass = require('gulp-sass');
+var gulp = require('gulp')
+var sass = require('gulp-sass')
+var sourcemaps = require('gulp-sourcemaps')
+var prefix = require('gulp-autoprefixer')
+var connect = require('gulp-connect')
+var eyeglass = require("eyeglass")
+var kss = require('kss')
+var eslint = require('gulp-eslint')
+var babel = require('gulp-babel')
+var concat = require('gulp-concat')
+var htmlmin = require('gulp-htmlmin')
+var uglify = require('gulp-uglify')
+var del = require('del')
+var imagemin = require('gulp-imagemin')
 
-gulp.task('sass', function(){
-  return gulp.src('site/sass/**/*.scss')
-    .pipe(sass()) 
-    .pipe(gulp.dest('site/css'))
-    .pipe(browserSync.reload({
-      stream: true
+//
+// Begin Gulp Tasks.
+//
+
+//
+// HTML Dev Workflow.
+//
+gulp.task('html:dev', function () {
+  return gulp.src(['src/**/*html', '!src/sass/**/*'])
+    .pipe(gulp.dest('.tmp'))
+    .pipe(connect.reload())
+})
+
+//
+// HTML Prod Workflow.
+//
+gulp.task('html:prod', function () {
+  return gulp.src(['src/**/*html', '!src/sass/**/*'])
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('dist'))
+})
+
+//
+// Images Dev Workflow.
+//
+gulp.task('images:dev', function () {
+  return gulp.src('src/**/*.{png,jpg,jpeg,gif,svg}')
+    .pipe(gulp.dest('.tmp'))
+    .pipe(connect.reload())
+})
+
+//
+// Images Prod Workflow.
+//
+gulp.task('images:prod', function () {
+  return gulp.src('src/**/*.{png,jpg,jpeg,gif,svg}')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist'))
+})
+
+//
+// CSS Dev Workflow.
+//
+gulp.task('styles:dev', function () {
+  return gulp.src('src/sass/**/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass(eyeglass({
+      outputStyle: 'expanded',
+      eyeglass: {
+        enableImportOnce: false
+      }
+    })).on('error', sass.logError))
+    .pipe(prefix(['last 2 versions']))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('.tmp/css'))
+    .pipe(connect.reload())
+})
+
+//
+// CSS Prod Workflow.
+//
+gulp.task('styles:prod', function () {
+  return gulp.src('src/sass/**/*.scss')
+    .pipe(sass(eyeglass({
+      outputStyle: 'compressed',
+      eyeglass: {
+        enableImportOnce: false
+      }
+    })).on('error', sass.logError))
+    .pipe(prefix(['last 2 versions']))
+    .pipe(gulp.dest('dist/css'))
+})
+
+//
+// Javascript Dev Workflow.
+//
+gulp.task('js:dev', function () {
+  return gulp.src('src/js/**/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['env']
     }))
-});
+    .pipe(concat('script.js'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('.tmp/js'))
+})
 
-gulp.task('watch', ['browserSync', 'sass'], function (){
-	gulp.watch('site/sass/**/*.scss', ['sass']);
-	gulp.watch('site/*.html', browserSync.reload); 
-  	gulp.watch('site/js/**/*.js', browserSync.reload);  
-});
+//
+// Javascript Prod Workflow.
+//
+gulp.task('js:prod', function () {
+  return gulp.src('src/js/**/*.js')
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat('script.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'))
+})
 
-/*--------- BrowserSync ---------*/
+//
+// Javascript linting.
+//
+gulp.task('lint', function () {
+  return gulp.src('src/js/**/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+})
 
-var browserSync = require('browser-sync').create();
+//
+// KSS Styleguide.
+//
 
-gulp.task('browserSync', function() {
-  browserSync.init({
-    server: {
-      baseDir: 'site'
-    },
+gulp.task('styleguide:generate', function () {
+  return kss({
+    source: 'src/sass',
+    destination: 'styleguide',
+    css: '../css/styles.css',
+    homepage: 'styleguide.md'
   })
 })
 
-/*--------- Concatenation and Minifying ---------*/
-
-var useref = require('gulp-useref');
-var uglify = require('gulp-uglify');
-var gulpIf = require('gulp-if');
-var cssnano = require('gulp-cssnano');
-
-gulp.task('useref', function(cb){
-  return gulp.src(['site/*.html'])
-    .pipe(useref())
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
-});
-
-/*--------- Check erors ---------*/
-
-var pump = require('pump');
-
-gulp.task('error', function (cb) {
-  pump([
-    gulp.src('site/**/*.js'),
-    uglify(),
-    gulp.dest('./dist/')
-  ], cb);
-});
-
-/*--------- Optimizing images ---------*/
-
-var imagemin = require('gulp-imagemin');
-var cache = require('gulp-cache');
-
-gulp.task('images', function(){
-  return gulp.src('site/img/**/*.+(png|jpg|jpeg|gif|svg)')
-  // Caching images that ran through imagemin
-  .pipe(cache(imagemin({
-      interlaced: true
-    })))
-  .pipe(gulp.dest('dist/img'))
-});
-
-//Clear cache
-gulp.task('cache:clear', function (callback) {
-return cache.clearAll(callback)
+gulp.task('styleguide:watch', function () {
+  gulp.watch('src/sass/**/*', ['styleguide:generate'])
 })
 
-/*--------- Deleting autogenerated files ---------*/
-
-var del = require('del');
-
-gulp.task('clean:dist', function() {
-  return del.sync('dist');
+//
+// Dev server.
+//
+gulp.task('connect', function () {
+  connect.server({
+    livereload: true,
+    root: '.tmp'
+  })
 })
 
-/*--------- Combining all tasks ---------*/
-
-var runSequence = require('run-sequence');
-
-gulp.task('build', function (callback) {
-  runSequence('clean:dist', 
-    ['sass', 'useref', 'images']
-  )
+//
+// Watch task.
+//
+gulp.task('watch', function () {
+  gulp.watch('src/sass/**/*.scss', ['styles:dev'])
+  gulp.watch('src/**/*.html', ['html:dev'])
+  gulp.watch('src/**/*.(png|jpe?g|gif)', ['images:dev'])
+  gulp.watch('src/js/**/*.js', ['lint', 'js:dev'])
 })
 
-gulp.task('default', function (callback) {
-  runSequence(['sass','browserSync', 'watch']
-  )
+gulp.task('clean', function () {
+  return del([
+    '.tmp',
+    'styleguide',
+    'dist'
+  ])
 })
+
+//
+// Composite Task declarations.
+//
+gulp.task('dev', ['html:dev', 'images:dev', 'styles:dev', 'js:dev', 'connect', 'watch'])
+gulp.task('build', ['lint', 'html:prod', 'images:prod', 'styles:prod', 'js:prod'])
+gulp.task('styleguide', ['styleguide:generate', 'styleguide:watch'])
