@@ -59,7 +59,7 @@ function Game(config) {
 
     function updateGame(el) {
         if(stats.flippedCards.length < 2) {
-            card = cards.filter(function(c){return Number(c.id) == Number(el.id)})[0];
+            var card = cards.filter(function(c){return Number(c.id) == Number(el.id)})[0];
             stats.flippedCards.push(card);
             card.toggleCard();
 

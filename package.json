@@ -6,7 +6,8 @@
     "dev": "gulp dev",
     "styleguide": "gulp styleguide",
     "build": "gulp build",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "sw": "gulp generate-service-worker"
   },
   "author": "Andrés Díaz Soto <andres.diaz.soto@gmail.com>",
   "license": "MIT",

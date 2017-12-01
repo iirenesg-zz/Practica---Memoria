@@ -20,6 +20,7 @@ var htmlmin = require('gulp-htmlmin')
 var uglify = require('gulp-uglify')
 var del = require('del')
 var imagemin = require('gulp-imagemin')
+var workbox = require('workbox-build')
 
 //
 // Begin Gulp Tasks.
@@ -177,8 +178,34 @@ gulp.task('clean', function () {
 })
 
 //
+// Copying static folder
+//
+gulp.task('static', function() {
+  return gulp.src('static/**/*')
+  .pipe(gulp.dest('.tmp/static'))
+})
+
+//
+// Service workers
+//
+const dist = `${__dirname}/.tmp`;
+gulp.task('generate-service-worker', () => {
+  return workbox.generateSW({
+    globDirectory: dist,
+    globPatterns: ['**/*.{html,css,js,png}', 'static/manifest.json'],
+    swDest: `${dist}/sw.js`,
+    clientsClaim: true,
+    skipWaiting: true
+  }).then(() => {
+    console.info('Service worker generation completed.');
+  }).catch((error) => {
+    console.warn('Service worker generation failed: ' + error);
+  });
+});
+
+//
 // Composite Task declarations.
 //
-gulp.task('dev', ['html:dev', 'images:dev', 'styles:dev', 'js:dev', 'connect', 'watch'])
+gulp.task('dev', ['html:dev', 'images:dev', 'styles:dev', 'js:dev', 'static', 'connect', 'watch'])
 gulp.task('build', ['lint', 'html:prod', 'images:prod', 'styles:prod', 'js:prod'])
 gulp.task('styleguide', ['styleguide:generate', 'styleguide:watch'])
