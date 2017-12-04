@@ -180,16 +180,36 @@ gulp.task('clean', function () {
 //
 // Copying static folder
 //
-gulp.task('static', function() {
+gulp.task('static:dev', function() {
   return gulp.src('static/**/*')
   .pipe(gulp.dest('.tmp/static'))
+})
+
+gulp.task('static:prod', function() {
+  return gulp.src('static/**/*')
+  .pipe(gulp.dest('dist/static'))
 })
 
 //
 // Service workers
 //
-const dist = `${__dirname}/.tmp`;
-gulp.task('generate-service-worker', () => {
+const tmp = `${__dirname}/.tmp`;
+gulp.task('generate-service-worker:dev', () => {
+  return workbox.generateSW({
+    globDirectory: tmp,
+    globPatterns: ['**/*.{html,css,js,png}', 'static/manifest.json'],
+    swDest: `${tmp}/sw.js`,
+    clientsClaim: true,
+    skipWaiting: true
+  }).then(() => {
+    console.info('Service worker generation completed.');
+  }).catch((error) => {
+    console.warn('Service worker generation failed: ' + error);
+  });
+});
+
+const dist = `${__dirname}/dist`;
+gulp.task('generate-service-worker:prod', () => {
   return workbox.generateSW({
     globDirectory: dist,
     globPatterns: ['**/*.{html,css,js,png}', 'static/manifest.json'],
@@ -206,6 +226,6 @@ gulp.task('generate-service-worker', () => {
 //
 // Composite Task declarations.
 //
-gulp.task('dev', ['html:dev', 'images:dev', 'styles:dev', 'js:dev', 'static', 'connect', 'watch'])
-gulp.task('build', ['lint', 'html:prod', 'images:prod', 'styles:prod', 'js:prod'])
+gulp.task('dev', ['html:dev', 'images:dev', 'styles:dev', 'js:dev', 'static:dev', 'connect', 'watch'])
+gulp.task('build', ['lint', 'html:prod', 'images:prod', 'styles:prod', 'static:prod', 'js:prod'])
 gulp.task('styleguide', ['styleguide:generate', 'styleguide:watch'])
