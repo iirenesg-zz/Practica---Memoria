@@ -28,27 +28,27 @@ function init() {
 
 	// Service Worker registration
 	if ('serviceWorker' in navigator) {
-	  window.addEventListener('load', () => {
-	    navigator.serviceWorker.register('/sw.js').then(registration => {
+	  window.addEventListener('load', function() {
+	    navigator.serviceWorker.register('/sw.js').then(function(registration) {
 	      // Registration was successful
 	      console.log('ServiceWorker registration successful with scope: ', registration.scope)
-	    }, err => {
+	    }, function(err) {
 	      // registration failed :(
 	      console.log('ServiceWorker registration failed: ', err)
-	    })
-	  })
+	    });
+	  });
 	}
 
 	if(save.getData('score')) {
     max = {
-      score: save.getData('score').score
+    	score: save.getData('score').score
     };
     var message = document.getElementById('message');
     message.innerHTML = `<p>Best score: <span>${max.score}</span></p>`
 	} else {
-    max = {
-      score: 0
-    };
+	    max = {
+	      score: 0
+	    };
 	}
 };
 
