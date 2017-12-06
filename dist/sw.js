@@ -55,19 +55,19 @@ const fileManifest = [
     "revision": "eb587107053ddbbcf4d1a098c3e09a51"
   },
   {
-    "url": "static/game-icon-2x.png",
+    "url": "data/game-icon-2x.png",
     "revision": "51bcf0a4ca14758b97189ef5763b2445"
   },
   {
-    "url": "static/game-icon-3x.png",
+    "url": "data/game-icon-3x.png",
     "revision": "ddb299e5218e4e4e9e42d61f4e3d111a"
   },
   {
-    "url": "static/game-icon-4x.png",
+    "url": "data/game-icon-4x.png",
     "revision": "94184713024ec923e5e1c94242446b2f"
   },
   {
-    "url": "static/manifest.json",
+    "url": "data/manifest.json",
     "revision": "1272346e9219bc99069875955458cca5"
   }
 ];
