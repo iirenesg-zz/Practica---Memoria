@@ -25,7 +25,6 @@ function newGame() {
 var max;
 
 function init() {
-	console.log('IN');
 
 	// Service Worker registration
 	if ('serviceWorker' in navigator) {

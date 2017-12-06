@@ -227,5 +227,5 @@ gulp.task('generate-service-worker:prod', () => {
 // Composite Task declarations.
 //
 gulp.task('dev', ['html:dev', 'images:dev', 'styles:dev', 'js:dev', 'static:dev', 'connect', 'watch'])
-gulp.task('build', ['lint', 'html:prod', 'images:prod', 'styles:prod', 'static:prod', 'js:prod'])
+gulp.task('build', ['html:prod', 'images:prod', 'styles:prod', 'static:prod', 'js:prod'])
 gulp.task('styleguide', ['styleguide:generate', 'styleguide:watch'])
