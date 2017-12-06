@@ -48,11 +48,11 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "903fd1b0b8d94c4065fe58ad4bf96092"
+    "revision": "d0d72225ab1911911939c6b6da84529d"
   },
   {
     "url": "js/script.js",
-    "revision": "a9f3e411de0642944cad210a973ed14e"
+    "revision": "eb587107053ddbbcf4d1a098c3e09a51"
   },
   {
     "url": "static/game-icon-2x.png",
@@ -68,7 +68,7 @@ const fileManifest = [
   },
   {
     "url": "static/manifest.json",
-    "revision": "e04d269ed808b7c534fda7474fccb292"
+    "revision": "1272346e9219bc99069875955458cca5"
   }
 ];
 
